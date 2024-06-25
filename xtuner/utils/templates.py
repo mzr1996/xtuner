@@ -179,6 +179,10 @@ SYSTEM_TEMPLATE = ConfigDict(
               '- Text-to-speech: disabled.\n'),
     alpaca=('Below is an instruction that describes a task. '
             'Write a response that appropriately completes the request.\n'),
+    alpaca_rp=
+    ('Develop the plot slowly, always stay in character. '
+     'Describe all actions in full, elaborate, explicit, graphic, and vivid detail. '
+     'Mention all relevant sensory perceptions.\n'),
     arxiv_gentile=('If you are an expert in writing papers, please generate '
                    "a good paper title for this paper based on other authors' "
                    'descriptions of their abstracts.\n'),
