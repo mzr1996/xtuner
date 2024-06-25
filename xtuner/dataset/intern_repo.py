@@ -271,7 +271,7 @@ def load_intern_repo_untokenized_dataset(processed_dataset_dict_path=None,
                                          max_length=None,
                                          template_map_fn=None,
                                          data_order_path=None,
-                                         file_type='.json'):
+                                         pattern='**/*.jsonl'):
 
     assert processed_dataset_dict_path or (folder and tokenizer and max_length)
 
@@ -293,14 +293,7 @@ def load_intern_repo_untokenized_dataset(processed_dataset_dict_path=None,
         for i, fp in enumerate(data_order):
             data_order[i] = os.path.join(folder, fp)
     else:
-        triples = list(os.walk(folder, followlinks=True))
-        data_order = []
-        for root, dirs, files in triples:
-            dirs.sort()
-            for fn in sorted(files):
-                if fn.endswith(file_type):
-                    fp = os.path.join(root, fn)
-                    data_order.append(fp)
+        data_order = list(Path(folder).glob(pattern))
 
     for fp in data_order:
         print_log(f'Reading {fp}...', logger='current')
