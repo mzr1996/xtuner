@@ -8,9 +8,10 @@ def template_map_fn(example, template):
     conversation = example.get('conversation', [])
     for i, single_turn_conversation in enumerate(conversation):
         input = single_turn_conversation.get('input', '')
-        if input is None:
-            input = ''
-        input_text = template.INSTRUCTION.format(input=input, round=i + 1)
+        if input is None or input == '':
+            input_text = template.BOT.format(input=input, round=i + 1)
+        else:
+            input_text = template.INSTRUCTION.format(input=input, round=i + 1)
         system = single_turn_conversation.get('system', '')
         if system != '' and system is not None:
             system = template.SYSTEM.format(system=system)

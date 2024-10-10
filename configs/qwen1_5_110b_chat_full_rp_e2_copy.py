@@ -25,13 +25,13 @@ pretrained_model_name_or_path = '/mnt/hwfile/llmeval/opencompass/checkpoints/llm
 use_varlen_attn = False
 
 # Data
-dataset_path = '/mnt/hwfile/mm_dev/mazerun/ftdp_data/internlm2.5_s2_0621_rp1/'
+dataset_path = '/mnt/hwfile/mm_dev/mazerun/ftdp_data/20240625-rp'
 prompt_template = PROMPT_TEMPLATE.qwen_chat
 max_length = 16384
 pack_to_max_length = True
 
 # parallel
-sequence_parallel_size = 1
+sequence_parallel_size = 8
 
 # Scheduler & Optimizer
 batch_size = 1  # per_device
@@ -48,11 +48,11 @@ max_norm = 1  # grad clip
 warmup_ratio = 0.03
 
 # Save
-save_steps = 500
+save_steps = 1000
 save_total_limit = 1  # Maximum checkpoints to keep (-1 means unlimited)
 
 # Evaluate the generation performance during the training
-evaluation_freq = 500
+evaluation_freq = 1000
 SYSTEM = ''
 evaluation_inputs = [
     '请给我介绍五个上海的景点', 'Please tell me five scenic spots in Shanghai'
@@ -80,10 +80,10 @@ model = dict(
 #######################################################################
 train_dataset = dict(
     type=build_packed_dataset,
-    dataset=dict(
+    dataset_cfg=dict(
         type=load_intern_repo_untokenized_dataset,
         folder=dataset_path,
-        pattern='*/processed/**/*.jsonl',
+        pattern='processed/**/*.jsonl',
         tokenizer=tokenizer,
         max_length=max_length,
         template_map_fn=dict(type=template_map_fn_factory, template=prompt_template),

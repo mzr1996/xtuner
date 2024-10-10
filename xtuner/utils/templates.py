@@ -58,6 +58,7 @@ PROMPT_TEMPLATE = ConfigDict(
         SYSTEM=('<|im_start|>system\n{system}<|im_end|>\n'),
         INSTRUCTION=('<|im_start|>user\n{input}<|im_end|>\n'
                      '<|im_start|>assistant\n'),
+        BOT='<|im_start|>assistant\n',
         SUFFIX='<|im_end|>',
         SUFFIX_AS_EOS=True,
         SEP='\n',
