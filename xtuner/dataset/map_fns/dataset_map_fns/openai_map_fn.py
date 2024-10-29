@@ -34,7 +34,7 @@ def openai_map_fn(example):
         elif msg['role'] == 'assistant':
             output_with_loss = msg.get('loss', 'True')
             output_with_loss = str(output_with_loss)
-            output_with_loss = output_with_loss.lower() == 'true'
+            output_with_loss = output_with_loss.lower() != 'false'
             conversation.append({
                 'system': system,
                 'input': input,
